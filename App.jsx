@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import SearchBar from './SearchBar';
+import ResponseDisplay from './ResponseDisplay';
 import Spinner from './Spinner';
 import Toast from './Toast';
 import SearchHistory from './SearchHistory';
 import AdvancedFilters from './AdvancedFilters';
+import SearchResults from './SearchResults'; // ⬅️ مكون النتائج الجديد
 
 function App() {
   const translations = {
@@ -37,9 +39,9 @@ function App() {
       clear: 'Wyczyść',
       copy: 'Kopiuj',
       clearHistory: 'Wyczyść historię',
+      emptyQuery: '⚠️ Wprowadź zapytanie przed wyszukiwaniem',
       themeLight: 'Jasny',
       themeDark: 'Ciemny',
-      emptyQuery: '⚠️ Wprowadź zapytanie przed wyszukiwaniem',
     }
   };
 
@@ -51,6 +53,7 @@ function App() {
   };
 
   const supportedLangs = Object.keys(translations);
+
   const getDefaultLang = () => {
     const browserLang = navigator.language.split('-')[0];
     return supportedLangs.includes(browserLang) ? browserLang : 'en';
@@ -59,7 +62,8 @@ function App() {
   const [selectedLang, setSelectedLang] = useState(localStorage.getItem('lang') || 'all');
   const lang = selectedLang === 'all' ? getDefaultLang() : selectedLang;
   const [theme, setTheme] = useState('light');
-  const [results, setResults] = useState([]);
+  const [response, setResponse] = useState('');
+  const [displayedText, setDisplayedText] = useState('');
   const [loading, setLoading] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [showToast, setShowToast] = useState(false);
@@ -67,9 +71,8 @@ function App() {
   const [uploadedFileName, setUploadedFileName] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState(null);
+  const [results, setResults] = useState([]); // ⬅️ نتائج البحث الكاملة
   const inputRef = useRef();
-
-  const t = translations[lang];
 
   useEffect(() => {
     localStorage.setItem('lang', selectedLang);
@@ -80,6 +83,8 @@ function App() {
     inputRef.current?.focus();
   }, [theme]);
 
+  const t = translations[lang];
+
   const handleSearch = async (query) => {
     if (!query.trim()) {
       setToastMessage(t.emptyQuery);
@@ -89,30 +94,34 @@ function App() {
     }
 
     setLoading(true);
-    setResults([]);
+    setResponse('');
+    setDisplayedText('');
     setUploadedFileName('');
+    setResults([]);
 
     try {
       const res = await fetch(`http://localhost:8000/search/api_search?q=${encodeURIComponent(query)}&lang=${lang}`);
       const data = await res.json();
-      const hits = data.results || [];
-
-      if (hits.length > 0) {
-        setResults(hits);
+      if (data.results && data.results.length > 0) {
+        setResults(data.results);
         setHistory((prev) => [query, ...prev.filter((item) => item !== query)]);
       } else {
-        setResults([{ title: '❌', summary: 'لا توجد نتائج' }]);
+        setResults([]);
+        setResponse('❌ لا توجد نتائج');
       }
     } catch {
-      setResults([{ title: '❌', summary: 'حدث خطأ أثناء الاتصال بـ Django' }]);
+      setResults([]);
+      setResponse('❌ حدث خطأ أثناء الاتصال بـ Django');
     }
 
     setLoading(false);
   };
 
   const handleInputClear = () => {
-    setResults([]);
+    setResponse('');
+    setDisplayedText('');
     setUploadedFileName('');
+    setResults([]);
   };
 
   const handleFileUpload = async (file) => {
@@ -129,6 +138,18 @@ function App() {
     } catch {}
     setLoading(false);
   };
+
+  useEffect(() => {
+    let i = 0;
+    if (!loading && response) {
+      const timer = setInterval(() => {
+        setDisplayedText((prev) => prev + response[i]);
+        i++;
+        if (i >= response.length) clearInterval(timer);
+      }, 30);
+      return () => clearInterval(timer);
+    }
+  }, [response, loading]);
 
   return (
     <div className="container" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
@@ -182,15 +203,10 @@ function App() {
 
       {loading ? (
         <Spinner />
+      ) : results.length > 0 ? (
+        <SearchResults results={results} />
       ) : (
-        <div className="results-list">
-          {results.map((item, idx) => (
-            <div className="result-card" key={idx}>
-              <h3 dangerouslySetInnerHTML={{ __html: item.title }} />
-              <p dangerouslySetInnerHTML={{ __html: item.summary }} />
-            </div>
-          ))}
-        </div>
+        <ResponseDisplay response={displayedText} label={t.response} />
       )}
 
       {uploadedFileName && !loading && (
