@@ -6,7 +6,7 @@ import Spinner from './Spinner';
 import Toast from './Toast';
 import SearchHistory from './SearchHistory';
 import AdvancedFilters from './AdvancedFilters';
-import SearchResults from './SearchResults'; // ⬅️ مكون النتائج الجديد
+import SearchResults from './SearchResults';
 
 function App() {
   const translations = {
