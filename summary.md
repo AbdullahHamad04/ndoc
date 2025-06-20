@@ -16,7 +16,6 @@ The frontend communicates directly with the OpenSearch backend through structure
 - **File Upload Placeholder**: includes a UI button for uploading documents (planned for future functionality).
 ---
 
----
 
 ### 🔄 Frontend Workflow
 
