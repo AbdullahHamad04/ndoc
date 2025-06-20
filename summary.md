@@ -70,3 +70,18 @@ class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node;
 | Language Logic  | `navigator.language`        | Auto-detects browser language                |
 | Proxy Config    | Vite Proxy                  | Bypasses CORS for local OpenSearch queries   |
 
+---
+---
+
+### 🏆 Key Frontend Achievements
+
+- ✅ Clean, fast, and user-friendly interface using modular React components.
+- ✅ Multilingual UI supporting English, Arabic (RTL), and Polish with auto-detection and manual switching.
+- ✅ Integrated dark/light theme toggle with smooth transitions.
+- ✅ Dynamic search history tags that can be clicked or removed.
+- ✅ Real-time feedback via toast messages and animated spinner.
+- ✅ Advanced filters for refining results (date range, keywords, tags).
+- ✅ Fully responsive design compatible with desktop and mobile views.
+- ✅ Direct communication with OpenSearch through proxy configuration for CORS-free local development.
+
+---
