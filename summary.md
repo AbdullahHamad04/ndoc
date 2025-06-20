@@ -54,7 +54,7 @@ E1 --> F1([Enable Copy Button])
 E2 --> F1
 
 classDef node fill:#bbdefb,stroke:#333,stroke-width:1px;
-class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node;
+class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node
 
 ---
 
