@@ -1,5 +1,5 @@
 ## 🖥️ Implementation of React Frontend
 
-To complement the backend system, the **frontend of NeuroDoc** was developed using **React 19**, providing a modern, fast, and user-friendly interface. The interface allows users to search enterprise documents using keyword, semantic, or hybrid methods, while also supporting advanced filters, theme switching, and multilingual support.
+To complement the backend system, the **frontend of NeuroDoc** was developed using **React 19**, providing a modern, fast, and user-friendly interface. It allows users to search and explore enterprise documents through a clean and responsive interface.
 
-The frontend communicates directly with the OpenSearch backend through a custom query structure, and it dynamically updates the UI with search results, query highlights, and contextual metadata.
+The frontend communicates directly with the OpenSearch backend through structured queries, and it dynamically displays results with highlights, metadata, and smart UI interactions. The interface also supports multilingual options, theme switching, and advanced filtering for an enhanced user experience.
