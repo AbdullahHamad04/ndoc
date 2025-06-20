@@ -15,3 +15,17 @@ The frontend communicates directly with the OpenSearch backend through structure
 - **Dark Mode Toggle**: users can switch between light and dark themes with smooth transitions.
 - **File Upload Placeholder**: includes a UI button for uploading documents (planned for future functionality).
 ---
+
+---
+
+### 🔄 Frontend Workflow
+
+1. The user types a query in the floating input field.
+2. When submitted, the query is sent to the backend API using a `fetch` request.
+3. The frontend builds a structured request, including optional language and filter data.
+4. The results from the backend are displayed using styled blocks showing titles, snippets, and metadata.
+5. If no results are returned, a fallback message is shown to the user.
+6. The query is stored in the search history and displayed as a tag.
+7. A loading spinner appears during the request, and a toast message shows warnings like empty queries or errors.
+
+---
