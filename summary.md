@@ -70,5 +70,3 @@ class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node;
 | Language Logic  | `navigator.language`        | Auto-detects browser language                |
 | Proxy Config    | Vite Proxy                  | Bypasses CORS for local OpenSearch queries   |
 
----
-
