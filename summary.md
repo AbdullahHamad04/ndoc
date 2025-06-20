@@ -28,7 +28,6 @@ The frontend communicates directly with the OpenSearch backend through structure
 7. A loading spinner appears during the request, and a toast message shows warnings like empty queries or errors.
 
 ---
-
 ### 🧭 Frontend Flowchart
 
 ```mermaid
@@ -72,3 +71,4 @@ class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node;
 | Proxy Config    | Vite Proxy                  | Bypasses CORS for local OpenSearch queries   |
 
 ---
+
