@@ -88,22 +88,23 @@ class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node;
 ### 🧭 Frontend Flowchart
 
 ```mermaid
-flowchart LR
+flowchart TD
 
-A1([User Loads Interface]) --> A2[Initialize App] --> A3[Select Language / Theme] --> A4[Enter Query]
+A1([User Loads Interface]) --> A2[Initialize App] --> A3[Select Language / Theme]
+A3 --> A4[Enter Query]
 
 A4 --> B1{Is Input Empty?}
 B1 -->|Yes| B2[Show Toast Message]
-B1 -->|No| C1[Call handleSearch] --> D1[Show Spinner] --> D2[Send Request to OpenSearch API] --> D3[Receive Search Results]
+B1 -->|No| C1[Call handleSearch]
 
-D3 --> D4[Update SearchResults Component]
-D4 --> E1[Update Response Display if needed]
-D4 --> E2[Update Search History Tags]
+C1 --> D1[Show Spinner] --> D2[Send Request to OpenSearch API] --> D3[Receive Search Results]
 
-E1 --> F1([Enable Copy Button])
-E2 --> F1
+D3 --> D4[Update SearchResults]
+D4 --> E1[Update Response Display] --> F1([Enable Copy Button])
+D4 --> E2[Update Search History] --> F1
 
 classDef node fill:#bbdefb,stroke:#333,stroke-width:1px;
 class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node;
+
 ```
 
