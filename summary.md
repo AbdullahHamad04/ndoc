@@ -85,18 +85,25 @@ class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node;
 - ✅ Direct communication with OpenSearch through proxy configuration for CORS-free local development.
 
 ---
-### 🔗 React ↔ OpenSearch Connection
+### 🧭 Frontend Flowchart
 
 ```mermaid
 flowchart LR
-    A[🖥️ User on React UI] --> B[🔍 Enter Search Query]
-    B --> C[📤 Fetch Request Sent]
-    C --> D[Vite Proxy Server (localhost:5173)]
-    D --> E[📡 OpenSearch Server (localhost:9200)]
-    E --> F[📥 Search Results Returned]
-    F --> G[📄 Displayed in React UI]
 
-    classDef box fill:#e3f2fd,stroke:#333,stroke-width:1px,color:#000;
-    class A,B,C,D,E,F,G box;
+A1([User Loads Interface]) --> A2[Initialize App] --> A3[Select Language / Theme] --> A4[Enter Query]
+
+A4 --> B1{Is Input Empty?}
+B1 -->|Yes| B2[Show Toast Message]
+B1 -->|No| C1[Call handleSearch] --> D1[Show Spinner] --> D2[Send Request to OpenSearch API] --> D3[Receive Search Results]
+
+D3 --> D4[Update SearchResults Component]
+D4 --> E1[Update Response Display if needed]
+D4 --> E2[Update Search History Tags]
+
+E1 --> F1([Enable Copy Button])
+E2 --> F1
+
+classDef node fill:#bbdefb,stroke:#333,stroke-width:1px;
+class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node;
 ```
 
