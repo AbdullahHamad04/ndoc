@@ -85,3 +85,16 @@ class A1,A2,A3,A4,B1,B2,C1,D1,D2,D3,D4,E1,E2,F1 node;
 - ✅ Direct communication with OpenSearch through proxy configuration for CORS-free local development.
 
 ---
+```mermaid
+flowchart LR
+    A[🖥️ User on React UI] --> B[🔍 Enter Search Query]
+    B --> C[📤 Fetch Request Sent]
+    C --> D[Vite Proxy Server (localhost:5173)]
+    D --> E[📡 OpenSearch Server (localhost:9200)]
+    E --> F[📥 Search Results Returned]
+    F --> G[📄 Displayed in React UI]
+
+    classDef box fill:#f0f4c3,stroke:#333,stroke-width:1px,color:#000;
+    class A,B,C,D,E,F,G box;
+
+```
